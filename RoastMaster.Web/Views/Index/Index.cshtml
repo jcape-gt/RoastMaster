@@ -1,0 +1,87 @@
+﻿@model RoastMaster.Web.Models.IndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles {
+    <style>
+        .bean {
+            fill: #8c9361;
+        }
+
+        .bean-inner {
+            fill: #222;
+            opacity: 0.5;
+        }
+
+        .title {
+            font-family: 'Lato', sans-serif;
+            text-align: center;
+        }
+
+        .timer {
+            font-family: 'Lato', sans-serif;
+        }
+
+        body {
+            background-image: url('/Content/green_cup.png');
+            background-repeat: repeat;
+        }
+
+        select {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+}
+    <h1 class="title" style="font-weight: bolder">Coffee Roasting Timer</h1>
+
+    <div class="row">
+        <div class="form-group col-md-6 offset-md-3">
+            <select class="form-control" id="coffeeType">
+                <option disabled selected>[Coffee]</option>
+                @{
+                var speciesList = Model.originCoffeeDict.Keys;
+                foreach (var species in speciesList)
+                {
+                    <optgroup label="@species.Name">
+                        @foreach (var coffee in Model.originCoffeeDict[species])
+                    {
+                        <option value="@species.RoastTime">@coffee.Name</option>
+                }
+                    </optgroup>
+            }
+                }
+            </select>
+
+            <select class="form-control" onchange="roastTypeChanged(this)" id="roastType">
+                <option disabled selected>[Roast]</option>
+                @{
+                foreach (var roastType in Model.roastTypeList)
+                {
+                    <option value="@roastType.RoastPercentage">@roastType.Name</option>
+            }
+                }
+            </select>
+        </div>
+        <div class="col-md-12 text-center">
+            <button id="timerControl" type="button" class="btn btn-primary">Roast!</button>
+            <button id="resetControl" type="button" class="btn" disabled>Reset</button>
+            <div id="timer" style="visibility: hidden"> 00:00 </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <svg version="1.1" baseProfile="full"
+                        width="50" height="74"
+                        xmlns="http://www.w3.org/2000/svg">
+                    <rect class="bean" width="46" height="70" x="2" y="2" stroke="#2B2117" stroke-width="1.5" rx="25" fill="transparent" />
+
+                    <ellipse class="bean-inner" cx="25" cy="37" rx="2" ry="30" stroke="#000" fill="transparent" stroke-width="1.5" />
+                </svg>
+            </div>
+        </div>
+    </div>

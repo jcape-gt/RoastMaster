@@ -2,124 +2,164 @@
 var colorRegex = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
 
 // holds gradient color array and start, stop values.
-var roastColorGradient;
-var startColor = '#8c9361';
-var endColor = '#2B2117';
+var roastGradient = {
+    colorList: null,
+    steps: 50,
+    startColor: '#8c9361',
+    endColor: '#2B2117'
+}
 
-// number of steps (and thus colors) between start and 
-// end gradient colors.
-var gradientSteps = 50;
+var timer = {
+    element: null,
+    seconds: null,
+    interval: null,
+    frequency: 1000, // milliseconds
+    paused: false,
+    onRun: null,
+    onEnd: null
+}
 
 // Use event listeners to ensure we don't overwrite previously
 // set functionality
-window.addEventListener("load", function(){
-	roastColorGradient = generateRoastColorGradient();
+window.addEventListener('load', function () {
+    initRoastGradient();
 
-	$('#start').click(start);
-
-	getCoffee();
+    $('#timerControl').click(toggleTimer);
+    $('#resetControl').click(resetTimer);
 });
+
+function toggleTimer() {
+    if (timer.interval == null) {
+        var timerElement = $('#timer');
+        var roastTimePercentage = $('#roastType').val();
+        var maxRoastSeconds = $('#coffeeType').val();
+        var time = maxRoastSeconds * roastTimePercentage;
+
+        if (roastTimePercentage == null || maxRoastSeconds == null)
+            alert('Please Select Coffee and Roast');
+        else {
+            initTimer(time, roastTimePercentage, timerElement);
+            $('#resetControl').prop('disabled', false);
+            $('#timer').css('visibility', 'inherit');
+        }
+    }   
+    else if (timer.paused)
+        resumeTimer();
+    else
+        pauseTimer();
+}
+
+// [TODO]: A more robust timer implementation could involve creating
+// a moment instance (from moment.js) and allowing it to update based
+// on the frequency.
+// Argument roastEndPercent is based on the desired end roast, where "green" is
+// 0, "charcoal" is 1, and other values fall in between.
+function initTimer(totalSeconds, roastEndPercent, element) {
+    timer.seconds = totalSeconds;
+    timer.element = element;
+    
+    timer.onRun = function () {
+        var percentComplete = (totalSeconds - timer.seconds) / totalSeconds;
+        console.log(percentComplete + ' :: ' + roastEndPercent);
+        var roastColor = getRoastColor(percentComplete * roastEndPercent);
+
+        updateTimerDisplay(timer.seconds, element);
+        console.log(percentComplete + ' ' + roastEndPercent);
+        updateRoastColor(roastColor);
+    }
+
+    timer.onEnd = function () {
+        resetTimer();
+        alert('Roasted :)!');
+        $('#timer').css('visibility', 'hidden');
+        $('#timer').html('00:00');
+    }
+
+    timer.interval = setInterval(function () {
+        if (!timer.paused) {
+            timer.onRun();
+
+            if (--timer.seconds < 0) {
+                clearInterval(timer.interval);
+                timer.onEnd();
+                timer.interval = null;
+            }
+        }
+    }, timer.frequency);
+
+    resumeTimer();
+}
+
+// Handle pausing the timer
+function pauseTimer() {
+    timer.paused = true;
+    $('#timerControl').html('Resume!');
+}
+
+// Handle resuming the timer
+function resumeTimer() {
+    timer.paused = false;
+    $('#timerControl').html('Pause!');
+}
+
+// Reset the timer to it's initial state
+function resetTimer() {
+    timer.interval = null;
+    timer.seconds = null;
+    timer.onEnd = null;
+    timer.onRun = null;
+    timer.paused = false;
+
+    $('#timerControl').html('Roast!');
+    $(timer.element).html('')
+        ;}
+
+function initRoastGradient() {
+    // Generate an array of colors representing the gradient
+    // change in a bean's caramelization
+    var gradiant = tinygradient([roastGradient.startColor, roastGradient.endColor]);
+    roastGradient.colorList = gradiant.hsv(roastGradient.steps, 'short');
+}
 
 // Dry air makes a quicker roast
 function roastTypeChanged(roastType) {
 	// also take into account weather and humidity
-	var roastTimePercentage = $(roastType).val();
+    var roastTimePercentage = $(roastType).val();
+
+    console.log(roastType + ' ' + roastTimePercentage);
 	var roastColor = getRoastColor(roastTimePercentage);
-	UpdateRoastColor(roastColor);
+	updateRoastColor(roastColor);
 }
 
 // Updates the roast color of all elements of class 'bean'
-function UpdateRoastColor(roastColor) {
+function updateRoastColor(roastColor) {
 	var beans = $('.bean');
 
 	beans.each(function() {
-		$(this).css("fill", roastColor);
+		$(this).css('fill', roastColor);
 	});
 }
 
 // Get the bean color from the cacluated gradients
 function getRoastColor(roastTimePercentage) {
 	var roastColorIndex = Math.floor(roastTimePercentage * 
-		(gradientSteps - 1));
-	return roastColorGradient[roastColorIndex].toHexString()
+		(roastGradient.steps - 1));
+	return roastGradient.colorList[roastColorIndex].toHexString()
+	//alert (beanColorGradient[roastColorIndex]);
 }
 
-// Generate an array of colors representing the gradient
-// change in a bean's caramelization
-function generateRoastColorGradient() {
-	result = new Array();
-
-	if(isHexColor(startColor) && isHexColor(endColor)) {
-		var grad = tinygradient([startColor, endColor]);
-		result = grad.hsv(gradientSteps, 'short');
-	}
-
-	return result;
-}
-
-function gradientTest() {
-	var grad = tinygradient(['#8c9361', '#2B2117']);
-	//var colorsHsv = grad.hsv(50, 'long');
-	var html = '<section class="col-md-12">';
-
-	alert(grad);
-
-	grad.hsv(50, 'short').forEach(function(color) {
-        html += '<span style="background:' + color.toRgbString() + ';" title="' + color.toHexString() + '">' +color.toHexString() +'</span><br/>';
-    });
-	html += '</section>';
-    document.querySelector('.container').innerHTML += html;
-}
-
-function startTimer() {
-	var timer = $('.timer')[0];
-	createTimer(60, timer)
-}
-
-// [TODO]: A more robust timer implementation could involve creating
-// a moment instance (from moment.js) and allowing it to update based
-// on the frequency.
-// Argument roastStopPercent is based on the desired end roast, where "green" is
-// 0, "charcoal" is 1, and other values fall in between.
-function startRoast(totalSeconds, roastEndPercent, element) {
-	// Frequency (in ms) at which the interval is processed.
-	var frequency = 1000;
-	var secondsRemaining = totalSeconds;
-	var minutes;
-	var seconds;
-
-	// Ensure minutes are of correct type and are unsigned
-	// (the second part is important for efficient disposal)
-	if(typeof secondsRemaining === 'number' && secondsRemaining > 0)
-	{
-		var timerInterval = setInterval(function() {
-			var percentComplete = (totalSeconds-secondsRemaining)/totalSeconds;
-
-			updateTimer(secondsRemaining, element);
-			updateRoastColor(percentComplete, roastEndPercent);
-
-			if(--secondsRemaining < 0) {
-				clearInterval(timerInterval);
-			}
-		}, frequency);
-	}
-}
-
-function updateTimer(seconds, element) {
+function updateTimerDisplay(seconds, element) {
 	var minutes = parseInt(seconds/60);
 	var seconds = parseInt(seconds % 60);
-	$(element).html(minutes + "min" + seconds + "sec");
+	$(element).html(padDigits(minutes, 2) + ':' + padDigits(seconds,2));
 }
 
-// need a max value as well (always goes to final roast color)
-function updateRoastColor(percentComplete, roastEndPercent) {
-	// Scale the percentage relevant to number of gradient steps
-
-	
-	var colorValue = getRoastColor(percentComplete * roastEndPercent);
-	UpdateRoastColor(colorValue);
+// Left-pad the input number with zeroes
+function padDigits(number, digits) {
+    return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
 }
 
+// Ensure input is a valid Hex color
 function isHexColor(input) {
 	return colorRegex.test(input);
 }

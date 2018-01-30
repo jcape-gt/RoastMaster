@@ -9,3 +9,13 @@ C:\Users\jcape\source\repos\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.D
 C:\Users\jcape\source\repos\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.csproj.CoreCompileInputs.cache
 C:\Users\jcape\source\repos\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.dll
 C:\Users\jcape\source\repos\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.pdb
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\RoastMaster.Data.dll.config
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\RoastMaster.Data.dll
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\RoastMaster.Data.pdb
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\EntityFramework.dll
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\EntityFramework.xml
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.csproj.CoreCompileInputs.cache
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.dll
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.pdb
