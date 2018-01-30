@@ -1,0 +1,124 @@
+<html>
+	<head>
+		<!-- Open source font (Lukasz Dziedzic) --> 
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+		<!-- Bootstrap: minified base styles -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
+		<!-- jQuery: minified base script -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+
+		<!-- Bootstrap: minified base script -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<script src="./scripts/tinycolor.js"></script>
+		<script src="./scripts/tinygradient.min.js"></script>
+		<script src="./scripts/data.js"></script>
+		<script src="./scripts/main.js"></script>
+
+		<style>
+			.bean {
+				fill: #8c9361;
+			}
+
+			.bean-inner {
+				fill: #222;
+				opacity: 0.5;
+			}
+
+			.title {
+				font-family: 'Lato', sans-serif;
+			}
+
+			body {
+			    background-image: url("./resources/green_cup.png");
+			    background-repeat: repeat;
+			}
+		</style>
+
+		<script>
+			window.addEventListener("load", function(){
+				$('#start').click(start);
+			});
+
+			function start() {
+				setupTimer();
+			}
+
+			function setupTimer() {
+				var timerElement = $('#timer');
+				var roastTimePercentage = $('#roastType').val();
+				var maxRoastSeconds = $('#coffeeType').val();
+				var time = maxRoastSeconds * roastTimePercentage;
+				startRoast(time, roastTimePercentage, timerElement);
+			}
+
+		</script>
+	</head>
+	<body>
+
+		<div class="container">
+			<h1 class="title">Coffee Roasting Timer</h1>
+
+			<div class="form-group">
+			  <select class="form-control" id="coffeeType">
+			  	<option disabled selected>[Coffee]</option>
+			  	<optgroup label="Arabica">
+				    <option value=420>Guatemala Huehuetenango</option>
+				    <option value=420>Guatemala Acatenango Gesha Lot</option>
+				    <option value=420>Guadeloupe Bonifieur</option>
+				    <option value=420>Hawaiian Kona</option>
+			  	</optgroup>
+			  	<optgroup label="Robusta">
+			  		<option value=480>Sumatra Mandheling</option>
+					<option value=480>Sumatra Lintong</option>
+					<option value=480>Ethiopian Sidamo</option>
+					<option value=480>Ethiopian Harar</option>
+			  	</optgroup>
+			  </select>
+
+			<select class="form-control" id="roastType" 
+				onchange="roastTypeChanged(this)">
+			  	<option disabled selected>[Roast]</option>
+			    <option value=0>Green</option>
+			    <option value=0.4>American</option>
+			    <option value=0.5>City</option>
+			    <option value=0.55>City+</option>
+			    <option value=0.6>Full City</option>
+			    <option value=0.65>Full City+</option>
+			    <option value=0.75>Vienna</option>
+			    <option value=1>Charcoal</option>
+			  </select>
+
+			  <button id="start" type="button"  class="btn btn-primary">Roast!</button>
+
+			  <div id="timer">
+			  	TIMER
+			  </div>
+			</div>
+
+			<div id="gradTest"></div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<svg version="1.1" baseProfile="full"
+					     width="300" height="200"
+					     xmlns="http://www.w3.org/2000/svg">
+						<rect class="bean" width="46" height="70" x="2" y="2" stroke="#2B2117" stroke-width="1.5" rx="25" fill="transparent" />
+
+						<ellipse class="bean-inner" cx="25" cy="37" rx="2" ry="30" stroke="#000" fill="transparent" stroke-width="1.5"/>
+					</svg>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				start
+			</div>
+		</div>
+	</body>
+</html>

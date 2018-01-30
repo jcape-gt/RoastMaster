@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoastMaster</title>
+
+    <!-- Open source font (Lukasz Dziedzic) -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <!-- Bootstrap: minified base styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+
+    @RenderSection("Styles", false)
+
+    <!-- jQuery: minified base script -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/tinycolor.js"></script>
+    <script src="~/Scripts/tinygradient.min.js"></script>
+
+    @RenderSection("Scripts", false)
+
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

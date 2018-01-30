@@ -1,0 +1,15 @@
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\RoastMaster.DLL.dll.config
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\RoastMaster.DLL.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\RoastMaster.DLL.pdb
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\EntityFramework.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\MySql.Data.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\EntityFramework.xml
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\MySql.Data.xml
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\bin\Debug\MySql.Data.Entity.EF6.xml
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\obj\Debug\RoastMaster.DAL.csprojResolveAssemblyReference.cache
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\obj\Debug\RoastMaster.DAL.csproj.CoreCompileInputs.cache
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\obj\Debug\RoastMaster.DLL.dll
+C:\Users\jcape\source\repos\RoastMaster\RoastMaster.DLL\obj\Debug\RoastMaster.DLL.pdb
