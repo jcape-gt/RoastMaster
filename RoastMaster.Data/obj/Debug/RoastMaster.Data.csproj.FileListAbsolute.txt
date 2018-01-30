@@ -19,3 +19,4 @@ C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\bin\Debug\EntityFra
 C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.csproj.CoreCompileInputs.cache
 C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.dll
 C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.pdb
+C:\Users\jcape\Documents\GitHub\RoastMaster\RoastMaster.Data\obj\Debug\RoastMaster.Data.csprojResolveAssemblyReference.cache

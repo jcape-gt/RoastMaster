@@ -9,6 +9,7 @@ var roastGradient = {
     endColor: '#2B2117'
 }
 
+// Holds rudimentary timer reliated values
 var timer = {
     element: null,
     seconds: null,
@@ -28,6 +29,7 @@ window.addEventListener('load', function () {
     $('#resetControl').click(resetTimer);
 });
 
+// Alter timer based on three states: initialize, pause, resume
 function toggleTimer() {
     if (timer.interval == null) {
         var timerElement = $('#timer');
@@ -60,19 +62,18 @@ function initTimer(totalSeconds, roastEndPercent, element) {
     
     timer.onRun = function () {
         var percentComplete = (totalSeconds - timer.seconds) / totalSeconds;
-        console.log(percentComplete + ' :: ' + roastEndPercent);
         var roastColor = getRoastColor(percentComplete * roastEndPercent);
 
         updateTimerDisplay(timer.seconds, element);
-        console.log(percentComplete + ' ' + roastEndPercent);
         updateRoastColor(roastColor);
     }
 
     timer.onEnd = function () {
         resetTimer();
+        $('#timer').html('00:00');
         alert('Roasted :)!');
         $('#timer').css('visibility', 'hidden');
-        $('#timer').html('00:00');
+        
     }
 
     timer.interval = setInterval(function () {
@@ -80,9 +81,7 @@ function initTimer(totalSeconds, roastEndPercent, element) {
             timer.onRun();
 
             if (--timer.seconds < 0) {
-                clearInterval(timer.interval);
                 timer.onEnd();
-                timer.interval = null;
             }
         }
     }, timer.frequency);
@@ -104,6 +103,10 @@ function resumeTimer() {
 
 // Reset the timer to it's initial state
 function resetTimer() {
+    if (timer.interval != null) {
+        clearInterval(timer.interval);
+    }
+
     timer.interval = null;
     timer.seconds = null;
     timer.onEnd = null;
@@ -111,8 +114,7 @@ function resetTimer() {
     timer.paused = false;
 
     $('#timerControl').html('Roast!');
-    $(timer.element).html('')
-        ;}
+}
 
 function initRoastGradient() {
     // Generate an array of colors representing the gradient
@@ -121,13 +123,11 @@ function initRoastGradient() {
     roastGradient.colorList = gradiant.hsv(roastGradient.steps, 'short');
 }
 
-// Dry air makes a quicker roast
+// Event fired when a roastType select element is changed
 function roastTypeChanged(roastType) {
-	// also take into account weather and humidity
     var roastTimePercentage = $(roastType).val();
+    var roastColor = getRoastColor(roastTimePercentage);
 
-    console.log(roastType + ' ' + roastTimePercentage);
-	var roastColor = getRoastColor(roastTimePercentage);
 	updateRoastColor(roastColor);
 }
 
@@ -143,14 +143,16 @@ function updateRoastColor(roastColor) {
 // Get the bean color from the cacluated gradients
 function getRoastColor(roastTimePercentage) {
 	var roastColorIndex = Math.floor(roastTimePercentage * 
-		(roastGradient.steps - 1));
+        (roastGradient.steps - 1));
+
 	return roastGradient.colorList[roastColorIndex].toHexString()
-	//alert (beanColorGradient[roastColorIndex]);
 }
 
+// Update the timer element
 function updateTimerDisplay(seconds, element) {
 	var minutes = parseInt(seconds/60);
-	var seconds = parseInt(seconds % 60);
+    var seconds = parseInt(seconds % 60);
+
 	$(element).html(padDigits(minutes, 2) + ':' + padDigits(seconds,2));
 }
 
