@@ -31,13 +31,13 @@ window.addEventListener('load', function () {
 
 // Alter timer based on three states: initialize, pause, resume
 function toggleTimer() {
-    if (timer.interval == null) {
+    if (timer.interval === null) {
         var timerElement = $('#timer');
         var roastTimePercentage = $('#roastType').val();
         var maxRoastSeconds = $('#coffeeType').val();
         var time = maxRoastSeconds * roastTimePercentage;
 
-        if (roastTimePercentage == null || maxRoastSeconds == null)
+        if (roastTimePercentage === null || maxRoastSeconds === null)
             alert('Please Select Coffee and Roast');
         else {
             initTimer(time, roastTimePercentage, timerElement);
@@ -102,7 +102,7 @@ function resumeTimer() {
 
 // Reset the timer to it's initial state
 function resetTimer() {
-    if (timer.interval != null) {
+    if (timer.interval !== null) {
         clearInterval(timer.interval);
     }
 
@@ -171,7 +171,7 @@ function getRoastColor(roastTimePercentage) {
 // Update the timer element
 function updateTimerDisplay(seconds, element) {
 	var minutes = parseInt(seconds/60);
-    var seconds = parseInt(seconds % 60);
+    seconds = parseInt(seconds % 60);
 
 	$(element).html(padDigits(minutes, 2) + ':' + padDigits(seconds,2));
 }
