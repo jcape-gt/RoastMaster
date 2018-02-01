@@ -34,7 +34,7 @@ namespace RoastMaster.Data
         {
             roastTypeList = new List<RoastType>();
 
-            roastTypeList.Add(new RoastType { ID = 1, Name = "Green", RoastPercentage = 0.0 });
+            roastTypeList.Add(new RoastType { ID = 1, Name = "Green", RoastPercentage = 0.01 });
             roastTypeList.Add(new RoastType { ID = 2, Name = "American", RoastPercentage = 0.4 });
             roastTypeList.Add(new RoastType { ID = 3, Name = "City", RoastPercentage = 0.5 });
             roastTypeList.Add(new RoastType { ID = 4, Name = "City+", RoastPercentage = 0.55 });
