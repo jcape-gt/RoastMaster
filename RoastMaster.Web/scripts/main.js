@@ -69,10 +69,8 @@ function initTimer(totalSeconds, roastEndPercent, element) {
     }
 
     timer.onEnd = function () {
-        resetTimer
         alert('Roasted :)!');
-        $('#timer').html('00:00');
-        $('#timer').css('visibility', 'hidden');
+        resetTimer();
     }
 
     timer.interval = setInterval(function () {
