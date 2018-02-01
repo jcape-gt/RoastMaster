@@ -34,54 +34,137 @@
             margin: 0 auto;
         }
     </style>
-}
-    <h1 class="title" style="font-weight: bolder">Coffee Roasting Timer</h1>
 
-    <div class="row">
-        <div class="form-group col-md-6 offset-md-3">
-            <select class="form-control" id="coffeeType">
-                <option disabled selected>[Coffee]</option>
-                @{
+
+    <style>
+		#smallCircle {
+			stroke-dasharray: 0 264;
+		}
+
+		.smallCircleShow {
+			animation: smallShow 1s linear forwards;
+		}
+
+		.smallCircleHide {
+			animation: smallHide 0.5s linear forwards;
+		}
+
+		#largeCircle {
+			stroke-dasharray: 0 302;
+		}
+
+		.largeCircleShow {
+			animation: largeShow 1s linear forwards;
+		}
+
+		.largeCircleHide {
+			animation: largeHide 0.5s linear forwards;
+		}
+        
+		@@keyframes smallShow {
+			from {
+				stroke-dasharray: 0 264;
+			}
+			to {
+				stroke-dasharray: 66 198;
+			}
+		}
+
+		@@keyframes smallHide {
+			from {
+				stroke-dasharray: 66 198;
+			}
+			to {
+				stroke-dasharray: 0 264;
+			}
+		}
+
+		@@keyframes largeShow {
+			from {
+				stroke-dasharray: 0 302;
+			}
+			to {
+				stroke-dasharray: 75 226;
+			}
+		}
+
+		@@keyframes largeHide {
+			from {
+				stroke-dasharray: 75 226;
+			}
+			to {
+				stroke-dasharray: 0 302;
+			}
+		}
+    </style>
+
+}
+<h1 class="title" style="font-weight: bolder">Coffee Roasting Timer</h1>
+
+<div class="row">
+    <div class="form-group col-md-6 offset-md-3">
+        <select class="form-control" id="coffeeType">
+            <option disabled selected>[Coffee]</option>
+            @{
                 var speciesList = Model.originCoffeeDict.Keys;
                 foreach (var species in speciesList)
                 {
                     <optgroup label="@species.Name">
                         @foreach (var coffee in Model.originCoffeeDict[species])
-                    {
-                        <option value="@species.RoastTime">@coffee.Name</option>
-                }
+                        {
+                            <option value="@species.RoastTime">@coffee.Name</option>
+                        }
                     </optgroup>
-            }
                 }
-            </select>
+            }
+        </select>
 
-            <select class="form-control" onchange="roastTypeChanged(this)" id="roastType">
-                <option disabled selected>[Roast]</option>
-                @{
+        <select class="form-control" onchange="roastTypeChanged(this)" id="roastType">
+            <option disabled selected>[Roast]</option>
+            @{
                 foreach (var roastType in Model.roastTypeList)
                 {
                     <option value="@roastType.RoastPercentage">@roastType.Name</option>
-            }
                 }
-            </select>
-        </div>
-        <div class="col-md-12 text-center">
-            <button id="timerControl" type="button" class="btn btn-primary">Roast!</button>
-            <button id="resetControl" type="button" class="btn" disabled>Reset</button>
-            <div id="timer" style="visibility: hidden"> 00:00 </div>
-        </div>
+            }
+        </select>
     </div>
+    <div class="col-md-12 text-center">
+        <button id="timerControl" type="button" class="btn btn-primary">Roast!</button>
+        <button id="resetControl" type="button" class="btn" disabled>Reset</button>
+        <div id="timer" style="visibility: hidden"> 00:00 </div>
+    </div>
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <svg version="1.1" baseProfile="full"
-                        width="50" height="74"
-                        xmlns="http://www.w3.org/2000/svg">
-                    <rect class="bean" width="46" height="70" x="2" y="2" stroke="#2B2117" stroke-width="1.5" rx="25" fill="transparent" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div style="width: 100px; height:100px; position:relative; margin: 0 auto;">
+                <!-- small circle -->
+                <svg version="1.1" baseProfile="full" style="float: left; top:0; left: 0; position:absolute"
+                     width="100" height="100">
+                    <circle id="smallCircle" style="z-index:50" cx="50" cy="50" r="42" stroke="blue" stroke-width="3" fill="none" />
 
-                    <ellipse class="bean-inner" cx="25" cy="37" rx="2" ry="30" stroke="#000" fill="transparent" stroke-width="1.5" />
+                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360" to="0" dur="3.0s" additive="sum" repeatCount="indefinite" />
+                </svg>
+
+                <!-- larger circle -->
+                <svg version="1.1" baseProfile="full" style="float:left; top:0; left: 0; position: absolute"
+                     width="100" height="100">
+                    <circle id="largeCircle" cx="50" cy="50" r="48" stroke="blue" stroke-width="3" fill="none" />
+
+                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0" to="360" dur="2.5s" additive="sum" repeatCount="indefinite" />
+                </svg>
+
+                <!-- bean -->
+                <svg version="1.1" baseProfile="full" style="float:left; top:0; left: 0; position: absolute"
+                     width="100" height="100"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <rect class="bean" width="46" height="70" x="27" y="15" stroke="#2B2117" stroke-width="1.5" rx="25" fill="transparent" />
+
+                    <ellipse class="bean-inner" cx="50" cy="50" rx="2" ry="30" stroke="#000" fill="transparent" stroke-width="1.5" />
                 </svg>
             </div>
         </div>
     </div>
+</div>

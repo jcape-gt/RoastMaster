@@ -69,11 +69,10 @@ function initTimer(totalSeconds, roastEndPercent, element) {
     }
 
     timer.onEnd = function () {
-        resetTimer();
-        $('#timer').html('00:00');
+        resetTimer
         alert('Roasted :)!');
+        $('#timer').html('00:00');
         $('#timer').css('visibility', 'hidden');
-        
     }
 
     timer.interval = setInterval(function () {
@@ -93,12 +92,14 @@ function initTimer(totalSeconds, roastEndPercent, element) {
 function pauseTimer() {
     timer.paused = true;
     $('#timerControl').html('Resume!');
+    hideProgressCircles();
 }
 
 // Handle resuming the timer
 function resumeTimer() {
     timer.paused = false;
     $('#timerControl').html('Pause!');
+    showProgressCircles();
 }
 
 // Reset the timer to it's initial state
@@ -114,6 +115,27 @@ function resetTimer() {
     timer.paused = false;
 
     $('#timerControl').html('Roast!');
+
+    $('#timer').html('00:00');
+    $('#timer').css('visibility', 'hidden');
+    hideProgressCircles();
+}
+
+function showProgressCircles() {
+    document.getElementById('smallCircle').classList.remove('smallCircleHide');
+    document.getElementById('smallCircle').classList.add('smallCircleShow');
+
+    document.getElementById('largeCircle').classList.remove('largeCircleHide');
+    document.getElementById('largeCircle').classList.add('largeCircleShow');
+
+}
+
+function hideProgressCircles() {
+    document.getElementById('smallCircle').classList.remove('smallCircleShow');
+    document.getElementById('smallCircle').classList.add('smallCircleHide');
+
+    document.getElementById('largeCircle').classList.remove('largeCircleShow');
+    document.getElementById('largeCircle').classList.add('largeCircleHide');
 }
 
 function initRoastGradient() {
