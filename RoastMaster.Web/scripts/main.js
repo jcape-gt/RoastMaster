@@ -7,7 +7,7 @@ var roastGradient = {
     steps: 50,
     startColor: '#8c9361',
     endColor: '#2B2117'
-}
+};
 
 // Holds rudimentary timer reliated values
 var timer = {
@@ -18,7 +18,7 @@ var timer = {
     paused: false,
     onRun: null,
     onEnd: null
-}
+};
 
 // Use event listeners to ensure we don't overwrite previously
 // set functionality
@@ -66,12 +66,12 @@ function initTimer(totalSeconds, roastEndPercent, element) {
 
         updateTimerDisplay(timer.seconds, element);
         updateRoastColor(roastColor);
-    }
+    };
 
     timer.onEnd = function () {
         alert('Roasted :)!');
         resetTimer();
-    }
+    };
 
     timer.interval = setInterval(function () {
         if (!timer.paused) {
@@ -165,7 +165,7 @@ function getRoastColor(roastTimePercentage) {
 	var roastColorIndex = Math.floor(roastTimePercentage * 
         (roastGradient.steps - 1));
 
-	return roastGradient.colorList[roastColorIndex].toHexString()
+    return roastGradient.colorList[roastColorIndex].toHexString();
 }
 
 // Update the timer element
