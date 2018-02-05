@@ -67,7 +67,7 @@ function initTimer(totalSeconds, roastEndPercent, element) {
         updateTimerDisplay(timer.seconds, element);
         updateRoastColor(roastColor);
     };
-
+    
     timer.onEnd = function () {
         alert('Roasted :)!');
         resetTimer();
@@ -125,7 +125,6 @@ function showProgressCircles() {
 
     document.getElementById('largeCircle').classList.remove('largeCircleHide');
     document.getElementById('largeCircle').classList.add('largeCircleShow');
-
 }
 
 function hideProgressCircles() {
@@ -148,21 +147,21 @@ function roastTypeChanged(roastType) {
     var roastTimePercentage = $(roastType).val();
     var roastColor = getRoastColor(roastTimePercentage);
 
-	updateRoastColor(roastColor);
+    updateRoastColor(roastColor);
 }
 
 // Updates the roast color of all elements of class 'bean'
 function updateRoastColor(roastColor) {
-	var beans = $('.bean');
+    var beans = $('.bean');
 
-	beans.each(function() {
-		$(this).css('fill', roastColor);
-	});
+    beans.each(function() {
+        $(this).css('fill', roastColor);
+    });
 }
 
 // Get the bean color from the cacluated gradients
 function getRoastColor(roastTimePercentage) {
-	var roastColorIndex = Math.floor(roastTimePercentage * 
+    var roastColorIndex = Math.floor(roastTimePercentage * 
         (roastGradient.steps - 1));
 
     return roastGradient.colorList[roastColorIndex].toHexString();
@@ -170,10 +169,10 @@ function getRoastColor(roastTimePercentage) {
 
 // Update the timer element
 function updateTimerDisplay(seconds, element) {
-	var minutes = parseInt(seconds/60);
+    var minutes = parseInt(seconds/60);
     seconds = parseInt(seconds % 60);
 
-	$(element).html(padDigits(minutes, 2) + ':' + padDigits(seconds,2));
+    $(element).html(padDigits(minutes, 2) + ':' + padDigits(seconds,2));
 }
 
 // Left-pad the input number with zeroes
@@ -183,5 +182,5 @@ function padDigits(number, digits) {
 
 // Ensure input is a valid Hex color
 function isHexColor(input) {
-	return colorRegex.test(input);
+    return colorRegex.test(input);
 }
