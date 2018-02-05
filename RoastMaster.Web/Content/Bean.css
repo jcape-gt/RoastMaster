@@ -38,6 +38,23 @@
     animation: largeHide 0.5s linear forwards;
 }
 
+
+/*
+    Roasting color animation: 
+    @keyframes animColor2 {
+  0% {
+    background: hsl(68.4, 20.5%, 47.8%);
+  }
+  
+  20% {
+    background: hsl(45.7, 43%, 53.9%);
+  }
+  100% {
+    background: hsl(30, 30.3%, 12.9%);
+  }
+}
+*/
+
 @keyframes smallShow {
     from {
         stroke-dasharray: 0 264;
