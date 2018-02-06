@@ -91,6 +91,7 @@
   <ItemGroup>
     <Content Include="Content\.oldbootstrap.css" />
     <Content Include="Content\.oldbootstrap.min.css" />
+    <Content Include="Content\Bean.css" />
     <Content Include="Content\green_cup.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
